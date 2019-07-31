@@ -1,4 +1,4 @@
-EasyReport = LibStub("AceAddon-3.0"):NewAddon("EasyReport", "AceConsole-3.0", "AceEvent-3.0")
+EasyReport = LibStub("AceAddon-3.0"):NewAddon("EasyReport", "AceConsole-3.0")
 local er = EasyReport
 local AceGUI = LibStub("AceGUI-3.0")
 
