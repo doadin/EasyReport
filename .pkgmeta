@@ -1,0 +1,8 @@
+required-dependencies:
+    - Ace3
+package-as: EasyReport
+
+ignore:
+   - .pkgmeta
+   - .gitignore
+   - .gitattributes
