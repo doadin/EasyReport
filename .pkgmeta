@@ -6,6 +6,7 @@ ignore:
    - .pkgmeta
    - .gitignore
    - .gitattributes
+   - .travis.yml
 
 enable-nolib-creation: no
 

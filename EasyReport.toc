@@ -4,6 +4,7 @@
 ## Notes: Easily Report Players.
 ## Author: Doadin
 ## X-Curse-Project-ID: 333070
+## X-WoWI-ID: 25148
 
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
