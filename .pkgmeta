@@ -1,5 +1,5 @@
 required-dependencies:
-    - Ace3
+    - ace3
 package-as: EasyReport
 
 ignore:
