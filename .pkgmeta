@@ -7,6 +7,8 @@ ignore:
    - .gitignore
    - .gitattributes
    - .travis.yml
+   - .luacheckrc
+   - README.md
 
 enable-nolib-creation: no
 
