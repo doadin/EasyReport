@@ -34,6 +34,10 @@ local function ReportPlayerBadPetName()
     C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_PET_NAME, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
 end
 
+local function ReportServerLag()
+    C_ReportSystem.ReportServerLag()
+end
+
 --local options = {}
 --options = LibStub("AceDBOptions-3.0"):GetOptionsTable(options)
 --LibStub("AceConfig-3.0"):RegisterOptionsTable("EasyReport", options)
@@ -109,6 +113,14 @@ function er:ChatCommand(input)
     btn8:SetCallback("OnClick", ReportPlayerBadPetName)
     -- Add the button to the container
     f:AddChild(btn8)
+    -- Create a button
+    local btn9 = AceGUI:Create("Button")
+    btn9:SetWidth(165)
+    btn9:SetText("Report Server Lag")
+    btn9:SetCallback("OnClick", ReportPlayerBadPetName)
+    -- Add the button to the container
+    f:AddChild(btn9)
+
     f:PauseLayout()
   end
   if input == "spam" then
@@ -134,6 +146,9 @@ function er:ChatCommand(input)
   end
   if input == "badpetname" then
       ReportPlayerBadPetName()
+  end
+  if input == "serverlag" then
+    ReportServerLag()
   end
 end
 
