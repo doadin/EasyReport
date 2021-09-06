@@ -1,85 +1,113 @@
-EasyReport = LibStub("AceAddon-3.0"):NewAddon("EasyReport", "AceConsole-3.0")
+local EasyReport = LibStub("AceAddon-3.0"):NewAddon("EasyReport", "AceConsole-3.0")
 local er = EasyReport
 local AceGUI = LibStub("AceGUI-3.0")
-local isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
+
+local WOW_PROJECT_ID = _G.WOW_PROJECT_ID
+local WOW_PROJECT_CLASSIC = _G.WOW_PROJECT_CLASSIC
+local WOW_PROJECT_BURNING_CRUSADE_CLASSIC = _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+local WOW_PROJECT_MAINLINE = _G.WOW_PROJECT_MAINLINE
+local CreateFrame = _G.CreateFrame
+local tinsert = _G.tinsert
+local UISpecialFrames = _G.UISpecialFrames
+
+local function IsClassicWow() --luacheck: ignore 212
+	return WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
+end
+
+local function IsTBCWow() --luacheck: ignore 212
+	return WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+end
+
+local function IsRetailWow() --luacheck: ignore 212
+	return WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
+end
+
+local C_ChatInfo
+if IsClassicWow() or IsTBCWow() then
+    C_ChatInfo = _G.C_ChatInfo
+end
+local C_ReportSystem
+if IsRetailWow() then
+    C_ReportSystem = _G.C_ReportSystem
+end
 
 local function ReportPlayerSpam()
-    if isClassic then
+    if IsClassicWow() or IsTBCWow() then
         C_ChatInfo.ReportPlayer("spam", PlayerLocation:CreateFromUnit("target"))
     end
-    if not isClassic then
+    if IsRetailWow() then
         C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_SPAM, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
     end
 end
 
 local function ReportPlayerLanguage()
-    if isClassic then
+    if IsClassicWow() or IsTBCWow() then
         C_ChatInfo.ReportPlayer("language", PlayerLocation:CreateFromUnit("target"))
     end
-    if not isClassic then
+    if IsRetailWow() then
         C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_LANGUAGE, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
     end
 end
 
 local function ReportPlayerAbuse()
-    if isClassic then
+    if IsClassicWow() or IsTBCWow() then
         C_ChatInfo.ReportPlayer("abuse", PlayerLocation:CreateFromUnit("target"))
     end
-    if not isClassic then
+    if IsRetailWow() then
         C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_ABUSE, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
     end
 end
 
 local function ReportPlayerBadPlayerName()
-    if isClassic then
+    if IsClassicWow() or IsTBCWow() then
         C_ChatInfo.ReportPlayer("badplayername", PlayerLocation:CreateFromUnit("target"))
     end
-    if not isClassic then
+    if IsRetailWow() then
         C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_PLAYER_NAME, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
     end
 end
 
 local function ReportPlayerBadGuildName()
-    if isClassic then
+    if IsClassicWow() or IsTBCWow() then
         C_ChatInfo.ReportPlayer("badguildname", PlayerLocation:CreateFromUnit("target"))
     end
-    if not isClassic then
+    if IsRetailWow() then
         C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_GUILD_NAME, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
     end
 end
 
 local function ReportPlayerCheating()
-    if isClassic then
+    if IsClassicWow() or IsTBCWow() then
         C_ChatInfo.ReportPlayer("cheating", PlayerLocation:CreateFromUnit("target"))
     end
-    if not isClassic then
+    if IsRetailWow() then
         C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_CHEATING, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
     end
 end
 
 local function ReportPlayerBadBattlePatName()
-    if isClassic then
+    if IsClassicWow() or IsTBCWow() then
         C_ChatInfo.ReportPlayer("badbattlepetname", PlayerLocation:CreateFromUnit("target"))
     end
-    if not isClassic then
+    if IsRetailWow() then
         C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_BATTLEPET_NAME, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
     end
 end
 
 local function ReportPlayerBadPetName()
-    if isClassic then
+    if IsClassicWow() or IsTBCWow() then
         C_ChatInfo.ReportPlayer("badpetname", PlayerLocation:CreateFromUnit("target"))
     end
-    if not isClassic then
+    if IsRetailWow() then
         C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_PET_NAME, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
     end
 end
 
 local function ReportServerLag()
-    if isClassic then
+    if IsClassicWow() or IsTBCWow() then
         C_ChatInfo.ReportServerLag()
     end
-    if not isClassic then
+    if IsRetailWow() then
         C_ReportSystem.ReportServerLag()
     end
 end
@@ -238,7 +266,7 @@ function er:OnDisable()
 end
 
 local function OnEvent(self, event, ...)
-    if isClassic then
+    if IsClassicWow() or IsTBCWow() then
         print("Report Made")
     end
     if ... == true then
@@ -263,16 +291,16 @@ local function OnEvent(self, event, ...)
     end
 end
 
---[===[@non-retail@
-local EventFrame = CreateFrame("Frame")
-EventFrame:RegisterEvent("PLAYER_REPORT_SUBMITTED")
-EventFrame:SetScript("OnEvent", OnEvent)
---@end-non-retail@]===]
+if IsClassicWow() or IsTBCWow() then
+    local EventFrame = CreateFrame("Frame")
+    EventFrame:RegisterEvent("PLAYER_REPORT_SUBMITTED")
+    EventFrame:SetScript("OnEvent", OnEvent)
+end
 
---@retail@
-local EventFrame = CreateFrame("Frame")
-EventFrame:RegisterEvent("REPORT_PLAYER_RESULT")
-EventFrame:RegisterEvent("GLOBAL_MOUSE_DOWN")
-EventFrame:RegisterEvent("GLOBAL_MOUSE_UP")
-EventFrame:SetScript("OnEvent", OnEvent)
---@end-retail@
+if IsRetailWow() then
+    local EventFrame = CreateFrame("Frame")
+    EventFrame:RegisterEvent("REPORT_PLAYER_RESULT")
+    EventFrame:RegisterEvent("GLOBAL_MOUSE_DOWN")
+    EventFrame:RegisterEvent("GLOBAL_MOUSE_UP")
+    EventFrame:SetScript("OnEvent", OnEvent)
+end
