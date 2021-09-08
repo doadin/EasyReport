@@ -33,74 +33,74 @@ end
 
 local function ReportPlayerSpam()
     if IsClassicWow() or IsTBCWow() then
-        C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_SPAM, PlayerLocation:CreateFromUnit("target"))
+        C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_SPAM, PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
     if IsRetailWow() then
-        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_SPAM, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
+        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_SPAM, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
 end
 
 local function ReportPlayerLanguage()
     if IsClassicWow() or IsTBCWow() then
-        C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_LANGUAGE, PlayerLocation:CreateFromUnit("target"))
+        C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_LANGUAGE, PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
     if IsRetailWow() then
-        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_LANGUAGE, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
+        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_LANGUAGE, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
 end
 
 local function ReportPlayerAbuse()
     if IsClassicWow() or IsTBCWow() then
-        C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_ABUSE, PlayerLocation:CreateFromUnit("target"))
+        C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_ABUSE, PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
     if IsRetailWow() then
-        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_ABUSE, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
+        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_ABUSE, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
 end
 
 local function ReportPlayerBadPlayerName()
     if IsClassicWow() or IsTBCWow() then
-        C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_BAD_PLAYER_NAME, PlayerLocation:CreateFromUnit("target"))
+        C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_BAD_PLAYER_NAME, PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
     if IsRetailWow() then
-        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_PLAYER_NAME, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
+        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_PLAYER_NAME, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
 end
 
 local function ReportPlayerBadGuildName()
     if IsClassicWow() or IsTBCWow() then
-        C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_BAD_GUILD_NAME, PlayerLocation:CreateFromUnit("target"))
+        C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_BAD_GUILD_NAME, PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
     if IsRetailWow() then
-        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_GUILD_NAME, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
+        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_GUILD_NAME, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
 end
 
 local function ReportPlayerCheating()
     if IsClassicWow() or IsTBCWow() then
-        C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_CHEATING, PlayerLocation:CreateFromUnit("target"))
+        C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_CHEATING, PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
     if IsRetailWow() then
-        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_CHEATING, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
+        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_CHEATING, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
 end
 
 local function ReportPlayerBadBattlePatName()
     if IsClassicWow() or IsTBCWow() then
-        --C_ChatInfo.ReportPlayer("badbattlepetname", PlayerLocation:CreateFromUnit("target"))
+        --C_ChatInfo.ReportPlayer("badbattlepetname", PlayerLocation:CreateFromGUID(UnitGUID("target")))
         return
     end
     if IsRetailWow() then
-        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_BATTLEPET_NAME, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
+        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_BATTLEPET_NAME, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
 end
 
 local function ReportPlayerBadPetName()
     if IsClassicWow() or IsTBCWow() then
-        C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_BAD_PET_NAME, PlayerLocation:CreateFromUnit("target"))
+        C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_BAD_PET_NAME, PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
     if IsRetailWow() then
-        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_PET_NAME, UnitName("target"), PlayerLocation:CreateFromUnit("target"))
+        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_PET_NAME, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
 end
 
