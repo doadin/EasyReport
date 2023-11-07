@@ -31,12 +31,46 @@ if IsRetailWow() then
     C_ReportSystem = _G.C_ReportSystem
 end
 
+--Enum.ReportType: {
+--    Chat: integer = 0,
+--    InWorld: integer = 1,
+--    ClubFinderPosting: integer = 2,
+--    ClubFinderApplicant: integer = 3,
+--    GroupFinderPosting: integer = 4,
+--    GroupFinderApplicant: integer = 5,
+--    ClubMember: integer = 6,
+--    GroupMember: integer = 7,
+--    Friend: integer = 8,
+--    Pet: integer = 9,
+--    BattlePet: integer = 10,
+--    Calendar: integer = 11,
+--    Mail: integer = 12,
+--    PvP: integer = 13,
+--    PvPScoreboard: integer = 14,
+--    PvPGroupMember: integer = 15,
+--    CraftingOrder: integer = 16,
+--}
+
 local function ReportPlayerSpam()
     if IsClassicWow() or IsTBCWow() then
         C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_SPAM, PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
     if IsRetailWow() then
-        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_SPAM, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
+        --C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_SPAM, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
+        local Name,Realm = UnitName("target")
+        local name
+        if Name and Realm then
+            name = Name .. "-" .. Realm
+        else
+            name = Name
+        end
+        local reportInfo = ReportInfo:CreateReportInfoFromType(Enum.ReportType.Chat)
+        local PL = PlayerLocation:CreateFromGUID(UnitGUID("target"))
+        reportInfo:SetReportTarget(UnitGUID("target"))
+        ReportFrame:SetMinorCategoryFlag(Enum.ReportMinorCategory.Spam);
+        ReportFrame:SetMajorType(Enum.ReportMajorCategory.InappropriateCommunication);
+        reportInfo:SetComment("spam!!")
+        ReportFrame:InitiateReport(reportInfo, name, PL)
     end
 end
 
@@ -45,7 +79,21 @@ local function ReportPlayerLanguage()
         C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_LANGUAGE, PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
     if IsRetailWow() then
-        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_LANGUAGE, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
+        --C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_LANGUAGE, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
+        local Name,Realm = UnitName("target")
+        local name
+        if Name and Realm then
+            name = Name .. "-" .. Realm
+        else
+            name = Name
+        end
+        local reportInfo = ReportInfo:CreateReportInfoFromType(Enum.ReportType.Chat)
+        local PL = PlayerLocation:CreateFromGUID(UnitGUID("target"))
+        reportInfo:SetReportTarget(UnitGUID("target"))
+        ReportFrame:SetMinorCategoryFlag(Enum.ReportMinorCategory.Spam, true);
+        ReportFrame:SetMajorType(Enum.ReportMajorCategory.InappropriateCommunication);
+        reportInfo:SetComment("spam!!")
+        ReportFrame:InitiateReport(reportInfo, name, PL)
     end
 end
 
@@ -54,7 +102,21 @@ local function ReportPlayerAbuse()
         C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_ABUSE, PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
     if IsRetailWow() then
-        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_ABUSE, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
+        --C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_ABUSE, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
+        local Name,Realm = UnitName("target")
+        local name
+        if Name and Realm then
+            name = Name .. "-" .. Realm
+        else
+            name = Name
+        end
+        local reportInfo = ReportInfo:CreateReportInfoFromType(Enum.ReportType.Chat)
+        local PL = PlayerLocation:CreateFromGUID(UnitGUID("target"))
+        reportInfo:SetReportTarget(UnitGUID("target"))
+        ReportFrame:SetMinorCategoryFlag(Enum.ReportMinorCategory.TextChat, true);
+        ReportFrame:SetMajorType(Enum.ReportMajorCategory.InappropriateCommunication);
+        reportInfo:SetComment("spam!!")
+        ReportFrame:InitiateReport(reportInfo, name, PL)
     end
 end
 
@@ -63,7 +125,22 @@ local function ReportPlayerBadPlayerName()
         C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_BAD_PLAYER_NAME, PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
     if IsRetailWow() then
-        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_PLAYER_NAME, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
+        --C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_PLAYER_NAME, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
+        local Name,Realm = UnitName("target")
+        local name
+        if Name and Realm then
+            name = Name .. "-" .. Realm
+        else
+            name = Name
+        end
+        local reportInfo = ReportInfo:CreateReportInfoFromType(Enum.ReportType.GroupMember)
+        local PL = PlayerLocation:CreateFromGUID(UnitGUID("target"))
+        reportInfo:SetReportTarget(UnitGUID("target"))
+        reportInfo:SetReportType(Enum.ReportType.GroupMember)
+        ReportFrame:SetMinorCategoryFlag(Enum.ReportMinorCategory.CharacterName, true);
+        ReportFrame:SetMajorType(Enum.ReportMajorCategory.InappropriateName);
+        reportInfo:SetComment("spam!!")
+        ReportFrame:InitiateReport(reportInfo, name, PL)
     end
 end
 
@@ -72,7 +149,21 @@ local function ReportPlayerBadGuildName()
         C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_BAD_GUILD_NAME, PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
     if IsRetailWow() then
-        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_GUILD_NAME, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
+        --C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_GUILD_NAME, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
+        local Name,Realm = UnitName("target")
+        local name
+        if Name and Realm then
+            name = Name .. "-" .. Realm
+        else
+            name = Name
+        end
+        local reportInfo = ReportInfo:CreateReportInfoFromType(Enum.ReportType.Chat)
+        local PL = PlayerLocation:CreateFromGUID(UnitGUID("target"))
+        reportInfo:SetReportTarget(UnitGUID("target"))
+        ReportFrame:SetMinorCategoryFlag(Enum.ReportMinorCategory.GuildName, true);
+        ReportFrame:SetMajorType(Enum.ReportMajorCategory.InappropriateName);
+        reportInfo:SetComment("spam!!")
+        ReportFrame:InitiateReport(reportInfo, name, PL)
     end
 end
 
@@ -81,7 +172,21 @@ local function ReportPlayerCheating()
         C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_CHEATING, PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
     if IsRetailWow() then
-        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_CHEATING, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
+        --C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_CHEATING, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
+        local Name,Realm = UnitName("target")
+        local name
+        if Name and Realm then
+            name = Name .. "-" .. Realm
+        else
+            name = Name
+        end
+        local reportInfo = ReportInfo:CreateReportInfoFromType(Enum.ReportType.InWorld)
+        local PL = PlayerLocation:CreateFromGUID(UnitGUID("target"))
+        reportInfo:SetReportTarget(UnitGUID("target"))
+        ReportFrame:SetMinorCategoryFlag(Enum.ReportMinorCategory.Hacking, true);
+        ReportFrame:SetMajorType(Enum.ReportMajorCategory.Cheating);
+        reportInfo:SetComment("spam!!")
+        ReportFrame:InitiateReport(reportInfo, name, PL)
     end
 end
 
@@ -91,7 +196,21 @@ local function ReportPlayerBadBattlePatName()
         return
     end
     if IsRetailWow() then
-        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_BATTLEPET_NAME, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
+        --C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_BATTLEPET_NAME, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
+        local Name,Realm = UnitName("target")
+        local name
+        if Name and Realm then
+            name = Name .. "-" .. Realm
+        else
+            name = Name
+        end
+        local reportInfo = ReportInfo:CreateReportInfoFromType(Enum.ReportType.BattlePet)
+        local PL = PlayerLocation:CreateFromGUID(UnitGUID("target"))
+        reportInfo:SetReportTarget(UnitGUID("target"))
+        ReportFrame:SetMinorCategoryFlag(Enum.ReportMinorCategory.Name, true);
+        ReportFrame:SetMajorType(Enum.ReportMajorCategory.InappropriateName);
+        reportInfo:SetComment("spam!!")
+        ReportFrame:InitiateReport(reportInfo, name, PL)
     end
 end
 
@@ -100,7 +219,21 @@ local function ReportPlayerBadPetName()
         C_ChatInfo.ReportPlayer(PLAYER_REPORT_TYPE_BAD_PET_NAME, PlayerLocation:CreateFromGUID(UnitGUID("target")))
     end
     if IsRetailWow() then
-        C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_PET_NAME, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
+        --C_ReportSystem.OpenReportPlayerDialog(PLAYER_REPORT_TYPE_BAD_PET_NAME, UnitName("target"), PlayerLocation:CreateFromGUID(UnitGUID("target")))
+        local Name,Realm = UnitName("target")
+        local name
+        if Name and Realm then
+            name = Name .. "-" .. Realm
+        else
+            name = Name
+        end
+        local reportInfo = ReportInfo:CreateReportInfoFromType(Enum.ReportType.Pet)
+        local PL = PlayerLocation:CreateFromGUID(UnitGUID("target"))
+        reportInfo:SetReportTarget(UnitGUID("target"))
+        ReportFrame:SetMinorCategoryFlag(Enum.ReportMinorCategory.Name, true);
+        ReportFrame:SetMajorType(Enum.ReportMajorCategory.InappropriateName);
+        reportInfo:SetComment("spam!!")
+        ReportFrame:InitiateReport(reportInfo, name, PL)
     end
 end
 
@@ -147,7 +280,7 @@ function er:ChatCommand(input)
     f:SetHeight(290)
     f:SetLayout("List")
     if EasyReportFramePossition then
-        print("Restoring possition")
+        --print("Restoring possition")
         f:SetPoint(EasyReportFramePossition)
     end
     -- Create a button
@@ -207,12 +340,12 @@ function er:ChatCommand(input)
     -- Add the button to the container
     f:AddChild(btn8)
     -- Create a button
-    local btn9 = AceGUI:Create("Button")
-    btn9:SetWidth(165)
-    btn9:SetText("Report Server Lag")
-    btn9:SetCallback("OnClick", ReportServerLag)
-    -- Add the button to the container
-    f:AddChild(btn9)
+    --local btn9 = AceGUI:Create("Button")
+    --btn9:SetWidth(165)
+    --btn9:SetText("Report Server Lag")
+    --btn9:SetCallback("OnClick", ReportServerLag)
+    ---- Add the button to the container
+    --f:AddChild(btn9)
 
     -- Create a button
     local btn10 = AceGUI:Create("Button")
